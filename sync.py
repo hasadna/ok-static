@@ -16,6 +16,7 @@ BASE_URL = 'http://oknesset.org'
 OKNESSET_DIR = os.path.join(BASE_DIR, 'Open-Knesset')
 OKSTATIC_DIR = os.path.join(BASE_DIR, 'ok-static')
 
+sys.path.insert(0, OKNESSET_DIR)
 
 PAGES = (
     ('/', 'index.html'),
@@ -43,7 +44,23 @@ def copy_less_files():
     p.communicate()
 
         
+def collect_static():
+    from django.conf import settings, global_settings
+    from knesset import settings as ok_settings
+    from django.core.management import call_command
+
+    settings.configure(
+        global_settings,
+        INSTALLED_APPS=ok_settings.INSTALLED_APPS,
+        STATIC_URL=ok_settings.STATIC_URL,
+        STATIC_ROOT=os.path.join(OKSTATIC_DIR, 'static'),
+        STATICFILES_STORAGE='django.contrib.staticfiles.storage.StaticFilesStorage',
+        STATICFILES_DIRS=ok_settings.STATICFILES_DIRS)
+
+    call_command('collectstatic', interactive=False)
+
 
 if __name__ == '__main__':
     download_pages()
     copy_less_files()
+    collect_static()
