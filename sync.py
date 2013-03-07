@@ -30,7 +30,7 @@ def download_pages():
     for url, target in PAGES:
         response = urllib2.urlopen(BASE_URL + url + '?ModPagespeed=off')
         with open(target, 'w') as target_file:
-            target_file.write(response.read())
+            target_file.write(response.read().replace('"/static', '"static'))
 
 
 def copy_less_files():
