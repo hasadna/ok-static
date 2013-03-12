@@ -20,7 +20,7 @@ sys.path.insert(0, OKNESSET_DIR)
 
 PAGES = (
     ('/', 'index.html'),
-    ('/member/194/%D7%96%D7%91%D7%95%D7%9C%D7%95%D7%9F-%D7%90%D7%95%D7%A8%D7%9C%D7%91/', 'member.html'),
+    ('/member/114/%D7%A8%D7%90%D7%95%D7%91%D7%9F-%D7%A8%D7%99%D7%91%D7%9C%D7%99%D7%9F/', 'member.html'),
     ('/party/14/', 'party.html'),
     ('/about/', 'about.html'),
 )
